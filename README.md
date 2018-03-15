@@ -1,7 +1,7 @@
 Shellwords
 ===========
 
-A golang library for splitting command-line strings into tokens like a POSIX or Windows shell would.
+A golang library for splitting command-line strings into words like a Posix or Windows shell would.
 
 ## Installation
 
@@ -25,6 +25,12 @@ func main() {
     fmt.Println(word)
   }
 }
+
+# Outputs:
+# /usr/bin/bash
+# -e
+# -c
+# llamas are the "best" && echo 'alpacas'
 ```
 
 ## License
