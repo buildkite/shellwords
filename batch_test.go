@@ -68,3 +68,29 @@ func TestSplitBatch(t *testing.T) {
 		})
 	}
 }
+
+func TestQuoteBatch(t *testing.T) {
+	var testCases = []struct {
+		String   string
+		Expected string
+	}{
+		{`nothing_needed`, `nothing_needed`},
+		{`C:\bin\bash`, `C:\bin\bash`},
+		{`C:\Program Files\bin\bash.exe`, `"C:\Program Files\bin\bash.exe"`},
+		{`\\uncpath\My Files\bin\bash.exe`, `"\\uncpath\My Files\bin\bash.exe"`},
+		{`this has spaces`, `"this has spaces"`},
+		{`this has $pace$`, `"this has $pace$"`},
+		{`this has %spaces%`, `"this has ^%spaces^%"`},
+	}
+
+	for _, tc := range testCases {
+		tc := tc
+		t.Run("", func(t *testing.T) {
+			actual := shellwords.QuoteBatch(tc.String)
+
+			if tc.Expected != actual {
+				t.Fatalf("Expected vs Actual: \n%#v\n\n%#v", tc.Expected, actual)
+			}
+		})
+	}
+}
