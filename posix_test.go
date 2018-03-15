@@ -13,6 +13,11 @@ func TestSplitPosix(t *testing.T) {
 		Expected []string
 	}{
 		{
+			`true`, []string{
+				`true`,
+			},
+		},
+		{
 			`simple --string "quoted"`, []string{
 				`simple`,
 				`--string`,
