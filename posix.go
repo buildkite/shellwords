@@ -25,7 +25,7 @@ func SplitPosix(line string) ([]string, error) {
 // QuotePosix returns the string such that a posix shell would parse it as a single word
 func QuotePosix(s string) string {
 	var builder strings.Builder
-	var needsQuotes bool
+	var needsQuotes = len(s) == 0 // Ensure empty argument is quoted
 
 	for _, c := range s {
 		if strings.ContainsRune(posixSpecialChars, c) {

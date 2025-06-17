@@ -52,6 +52,19 @@ func TestSplitBatch(t *testing.T) {
 				`^^&`,
 			},
 		},
+		{
+			`simple ""`, []string{
+				`simple`,
+				``,
+			},
+		},
+		{
+			`simple "" "abc" `, []string{
+				`simple`,
+				``,
+				`abc`,
+			},
+		},
 	}
 
 	for _, tc := range testCases {
@@ -81,6 +94,7 @@ func TestQuoteBatch(t *testing.T) {
 		{`this has spaces`, `"this has spaces"`},
 		{`this has $pace$`, `"this has $pace$"`},
 		{`this has %spaces%`, `"this has ^%spaces^%"`},
+		{``, `""`},
 	}
 
 	for _, tc := range testCases {

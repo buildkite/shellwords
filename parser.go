@@ -36,6 +36,7 @@ type parser struct {
 func (p *parser) Parse() ([]string, error) {
 	var words = []string{}
 	var word strings.Builder
+	var token = false // Used to force token emission, even if empty
 
 	for {
 		// Read until we encounter a delimiter character
@@ -61,6 +62,8 @@ func (p *parser) Parse() ([]string, error) {
 				return nil, err
 			}
 
+			token = true // Ensure a token will be emitted, even if empty (e.g. "")
+
 			// Write to the buffer
 			word.WriteString(quote)
 
@@ -73,9 +76,10 @@ func (p *parser) Parse() ([]string, error) {
 
 		// Handle field seperators
 		case p.isFieldSeperator(r):
-			if word.Len() > 0 {
+			if word.Len() > 0 || token {
 				words = append(words, word.String())
 				word.Reset()
+				token = false
 			}
 
 		default:
@@ -83,7 +87,7 @@ func (p *parser) Parse() ([]string, error) {
 		}
 	}
 
-	if word.Len() > 0 {
+	if word.Len() > 0 || token {
 		words = append(words, word.String())
 		word.Reset()
 	}
