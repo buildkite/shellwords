@@ -34,9 +34,10 @@ type parser struct {
 }
 
 func (p *parser) Parse() ([]string, error) {
-	var words = []string{}
 	var word strings.Builder
-	var token = false // Used to force token emission, even if empty
+
+	words := []string{}
+	token := false // Used to force token emission, even if empty
 
 	for {
 		// Read until we encounter a delimiter character

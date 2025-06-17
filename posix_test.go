@@ -8,7 +8,7 @@ import (
 )
 
 func TestSplitPosix(t *testing.T) {
-	var testCases = []struct {
+	testCases := []struct {
 		String   string
 		Expected []string
 	}{
@@ -76,7 +76,7 @@ func TestSplitPosix(t *testing.T) {
 }
 
 func TestQuotePosix(t *testing.T) {
-	var testCases = []struct {
+	testCases := []struct {
 		String   string
 		Expected string
 	}{

@@ -8,7 +8,7 @@ import (
 )
 
 func TestSplitBatch(t *testing.T) {
-	var testCases = []struct {
+	testCases := []struct {
 		String   string
 		Expected []string
 	}{
@@ -83,7 +83,7 @@ func TestSplitBatch(t *testing.T) {
 }
 
 func TestQuoteBatch(t *testing.T) {
-	var testCases = []struct {
+	testCases := []struct {
 		String   string
 		Expected string
 	}{
