@@ -15,54 +15,54 @@ func TestSplitBatch(t *testing.T) {
 		{
 			`"\\vmware-host\Shared Folders\src\github.com\buildkite\agent\llamas @% test\buildkite-agent.exe" start`, []string{
 				`\\vmware-host\Shared Folders\src\github.com\buildkite\agent\llamas @% test\buildkite-agent.exe`,
-				`start`,
+				"start",
 			},
 		},
 		{
 			`simple 🙌🏻 --string "quo""ted"`, []string{
-				`simple`,
-				`🙌🏻`,
-				`--string`,
+				"simple",
+				"🙌🏻",
+				"--string",
 				`quo"ted`,
 			},
 		},
 
 		{
 			`simple --string "quo""ted"`, []string{
-				`simple`,
-				`--string`,
+				"simple",
+				"--string",
 				`quo"ted`,
 			},
 		},
 		{
 			`mkdir "My favorite "^%OS^%`, []string{
-				`mkdir`,
-				`My favorite %OS%`,
+				"mkdir",
+				"My favorite %OS%",
 			},
 		},
 		{
 			`runme.exe /password:"~!@#$^%^^^&*()_+^|-=\][{}'^;:""/.>?,<"`, []string{
-				`runme.exe`,
+				"runme.exe",
 				`/password:~!@#$%^&*()_+|-=\][{}';:"/.>?,<`,
 			},
 		},
 		{
-			`echo ^^^^^&`, []string{
-				`echo`,
-				`^^&`,
+			"echo ^^^^^&", []string{
+				"echo",
+				"^^&",
 			},
 		},
 		{
 			`simple ""`, []string{
-				`simple`,
-				``,
+				"simple",
+				"",
 			},
 		},
 		{
 			`simple "" "abc" `, []string{
-				`simple`,
-				``,
-				`abc`,
+				"simple",
+				"",
+				"abc",
 			},
 		},
 	}
@@ -87,14 +87,14 @@ func TestQuoteBatch(t *testing.T) {
 		String   string
 		Expected string
 	}{
-		{`nothing_needed`, `nothing_needed`},
+		{"nothing_needed", "nothing_needed"},
 		{`C:\bin\bash`, `C:\bin\bash`},
 		{`C:\Program Files\bin\bash.exe`, `"C:\Program Files\bin\bash.exe"`},
 		{`\\uncpath\My Files\bin\bash.exe`, `"\\uncpath\My Files\bin\bash.exe"`},
-		{`this has spaces`, `"this has spaces"`},
-		{`this has $pace$`, `"this has $pace$"`},
-		{`this has %spaces%`, `"this has ^%spaces^%"`},
-		{``, `""`},
+		{"this has spaces", `"this has spaces"`},
+		{"this has $pace$", `"this has $pace$"`},
+		{"this has %spaces%", `"this has ^%spaces^%"`},
+		{"", `""`},
 	}
 
 	for _, tc := range testCases {
