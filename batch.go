@@ -26,7 +26,7 @@ func SplitBatch(line string) ([]string, error) {
 // QuoteBatch returns the string such that a CMD.EXE shell would parse it as a single word
 func QuoteBatch(s string) string {
 	var builder strings.Builder
-	var needsQuotes = len(s) == 0 // Ensure empty argument is quoted
+	needsQuotes := len(s) == 0 // Ensure empty argument is quoted
 
 	for _, c := range s {
 		if strings.ContainsRune(batchSpecialChars, c) {

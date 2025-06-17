@@ -34,9 +34,10 @@ type parser struct {
 }
 
 func (p *parser) Parse() ([]string, error) {
-	var words = []string{}
 	var word strings.Builder
-	var token = false // Used to force token emission, even if empty
+
+	words := []string{}
+	token := false // Used to force token emission, even if empty
 
 	for {
 		// Read until we encounter a delimiter character
@@ -83,7 +84,7 @@ func (p *parser) Parse() ([]string, error) {
 			}
 
 		default:
-			return nil, fmt.Errorf("Unhandled character %c at pos %d", r, p.pos)
+			return nil, fmt.Errorf("unhandled character %c at pos %d", r, p.pos)
 		}
 	}
 
@@ -101,8 +102,7 @@ func (p *parser) scanQuote(delim rune) (string, error) {
 	for {
 		r := p.nextRune()
 		if r == eof {
-			return "", fmt.Errorf(
-				"Expected closing quote %c at offset %d, got EOF", delim, p.pos-1)
+			return "", fmt.Errorf("expected closing quote %c at offset %d, got EOF", delim, p.pos-1)
 		}
 		// Check for escaped characters
 		if escapeChar, escaped := p.isQuoteEscape(r); escaped {

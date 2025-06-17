@@ -1,0 +1,15 @@
+steps:
+  - name: ":broom: Formatting + Linting"
+    key: lint
+    command: ".buildkite/steps/check-code-committed.sh"
+    plugins:
+      docker#v5.12.0:
+        image: "golang:1.24.3"
+
+
+  - name: ":hammer: Tests"
+    key: test
+    command: "go test ./..."
+    plugins:
+      docker#v5.12.0:
+        image: "golang:1.24.3"
